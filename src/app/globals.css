@@ -24,3 +24,49 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .footer-section {
+    @apply w-full md:w-[250px] flex flex-col gap-6;
+  }
+
+  .footer-header {
+    @apply text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500 bg-clip-text text-transparent;
+  }
+
+  .footer-text {
+    @apply text-sm text-gray-300 font-light;
+  }
+
+  .footer-contact {
+    @apply flex items-center gap-3;
+  }
+
+  .footer-icon {
+    @apply w-5 h-5 text-cyan-400;
+  }
+
+  .footer-link {
+    @apply text-sm text-gray-400 hover:text-white transition duration-200;
+  }
+  /* .input-base {
+    @apply peer w-full h-full px-4 pt-5 pb-2 text-sm text-white border-2 rounded-lg outline-none transition duration-300 bg-[#0a0a0a];
+  } */
+}
+@layer utilities {
+  @keyframes underline-glow {
+    0% {
+      box-shadow: 0 0 0px rgba(59, 130, 246, 0.2); /* tailwind blue-500 */
+    }
+    50% {
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+    }
+    100% {
+      box-shadow: 0 0 0px rgba(59, 130, 246, 0.2);
+    }
+  }
+
+  .animate-underline-glow {
+    animation: underline-glow 2s ease-in-out infinite;
+  }
+}
