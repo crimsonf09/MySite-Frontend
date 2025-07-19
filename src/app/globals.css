@@ -49,20 +49,42 @@ body {
   .footer-link {
     @apply text-sm text-gray-400 hover:text-white transition duration-200;
   }
+
   /* .input-base {
     @apply peer w-full h-full px-4 pt-5 pb-2 text-sm text-white border-2 rounded-lg outline-none transition duration-300 bg-[#0a0a0a];
   } */
 }
+
 @layer utilities {
   @keyframes underline-glow {
     0% {
-      box-shadow: 0 0 0px rgba(59, 130, 246, 0.2); /* tailwind blue-500 */
+      box-shadow: 0 0 0px rgba(59, 130, 246, 0.2);
+      /* tailwind blue-500 */
     }
+
     50% {
       box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
     }
+
     100% {
       box-shadow: 0 0 0px rgba(59, 130, 246, 0.2);
+    }
+  }
+
+  @keyframes rippleWave {
+    0% {
+      transform: scale(1) translateY(0);
+      opacity: 0.3;
+    }
+
+    50% {
+      transform: scale(1.05) translateY(-4px);
+      opacity: 0.6;
+    }
+
+    100% {
+      transform: scale(1) translateY(0);
+      opacity: 0.3;
     }
   }
 

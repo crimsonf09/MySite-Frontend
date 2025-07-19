@@ -1,83 +1,114 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import { projectStructure } from '@/app/project/page';
+"use client";
 
-interface ProjectCardProps {
+import { projectStructure } from "../page";
+import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import React, { Suspense } from "react";
+
+const ReactPlayer = React.lazy(() => import("react-player"));
+
+interface Props {
   project: projectStructure;
   index: number;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
-  const [currentImage, setCurrentImage] = useState(0);
-  const hasVideo = project.shortMedia?.endsWith('.mp4');
+export default function ProjectCard({ project, index }: Props) {
+  const { title, shortDescription, techStack, type, images, shortMedia } = project;
 
-  // Staggered effect
-  const offset = (index % 3) * 2; // e.g. 0px, 2px, 4px shift
+  const isVideo = shortMedia && shortMedia.length > 0;
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
-    if (!hasVideo && project.images.length > 1) {
-      const interval = setInterval(() => {
-        setCurrentImage((prev) => (prev + 1) % project.images.length);
-      }, 3000);
-      return () => clearInterval(interval);
+    if (isVideo) {
+      const timeout = setTimeout(() => setShowVideo(true), 500);
+      return () => clearTimeout(timeout);
     }
-  }, [project.images, hasVideo]);
+  }, [isVideo]);
+
+  // Artsy random style
+  const rotation = (index % 7) * 3 - 6;
+  const translateY = (index % 5) * 12 - 15;
+  const translateX = (index % 4) * 6 - 10;
+  const scale = 0.95 + ((index % 4) * 0.02);
 
   return (
-    <div
-      className="w-[300px] bg-white rounded-2xl shadow-md overflow-hidden transform transition hover:scale-105"
-      style={{ marginTop: `${offset}rem` }}
+    <motion.div
+      className="relative w-[270px] sm:w-[250px] backdrop-blur-2xl p-5 rounded-3xl overflow-hidden transition-all duration-700 hover:scale-[1.06] hover:shadow-[0_20px_80px_rgba(0,255,255,0.3)]"
+      style={{
+        transform: `rotate(${rotation}deg) translate(${translateX}px, ${translateY}px) scale(${scale})`,
+        zIndex: 20 - (index % 10),
+      }}
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.15, type: "spring", stiffness: 60 }}
     >
-      <div className="h-48 w-full bg-gray-200 relative">
-        {hasVideo ? (
-          <video
-            src={project.shortMedia}
-            controls
-            className="w-full h-full object-cover"
-          />
+      {/* ✨ Wavy Background Effect */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(0,172,238,0.15)_0%,_transparent_70%)] animate-pulse" />
+
+      {/* 💧 Hover Ripple Animation */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-400/10 via-blue-400/5 to-indigo-500/10 transition-all duration-700 group-hover:blur-md group-hover:scale-105" />
+
+      {/* Media (video or image swiper) */}
+      <div className="relative z-10 aspect-video w-full mb-4 overflow-hidden rounded-xl border border-white/10 shadow-inner">
+        {showVideo ? (
+          <Suspense fallback={<div className="text-center text-xs">Loading video...</div>}>
+            <ReactPlayer width="100%" height="100%" controls />
+          </Suspense>
         ) : (
-          <img
-            src={project.images[currentImage]}
-            alt={project.title}
-            className="w-full h-full object-cover transition-opacity duration-700"
-          />
+          <Swiper spaceBetween={10} loop>
+            {images.map((img, i) => (
+              <SwiperSlide key={i}>
+                <Image
+                  src={img.startsWith("/") ? img : `/projects/${img}`}
+                  alt={`${title}-${i}`}
+                  width={400}
+                  height={225}
+                  className="w-full h-full object-cover rounded-xl transition-all duration-700 brightness-95 hover:brightness-110"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         )}
       </div>
 
-      <div className="p-4">
-        <h2 className="text-xl font-bold mb-2">{project.title}</h2>
-        <p className="text-sm text-gray-600 mb-3">{project.shortDescription}</p>
+      {/* Title */}
+      <h2 className="text-lg font-extrabold tracking-wider bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500 bg-clip-text text-transparent mb-2">
+        {title}
+      </h2>
 
-        <div className="flex flex-wrap gap-1 mb-2">
-          {project.techStack.map((tech) => (
-            <span
-              key={tech}
-              className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+      {/* Description */}
+      <p className="text-sm text-white/70 mb-3">{shortDescription}</p>
 
-        <div className="flex flex-wrap gap-1 mb-2">
-          {project.type.map((t) => (
-            <span
-              key={t}
-              className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex flex-wrap gap-1">
-          <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">
-            ID: {project.id}
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2 mb-2">
+        {type.map((t, i) => (
+          <span
+            key={i}
+            className="bg-gradient-to-r from-purple-600/20 to-indigo-600/20 text-purple-200 text-[11px] px-3 py-1 rounded-full border border-purple-500/30"
+          >
+            {t}
           </span>
-        </div>
+        ))}
       </div>
-    </div>
-  );
-};
 
-export default ProjectCard;
+      {/* Tech Stack */}
+      <div className="flex flex-wrap gap-2">
+        {techStack.map((tech, i) => (
+          <span
+            key={i}
+            className="bg-blue-600/10 text-blue-300 text-[11px] px-3 py-1 rounded-full border border-blue-500/20"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      {/* Glow Edge */}
+      <div className="absolute inset-0 rounded-3xl pointer-events-none border border-white/10 shadow-[inset_0_0_30px_rgba(255,255,255,0.04)]" />
+    </motion.div>
+  );
+}
