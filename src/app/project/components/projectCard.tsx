@@ -36,7 +36,7 @@ export default function ProjectCard({ project, index }: Props) {
 
   return (
     <motion.div
-      className="relative w-[270px] sm:w-[250px] backdrop-blur-2xl p-5 rounded-3xl overflow-hidden transition-all duration-700 hover:scale-[1.06] hover:shadow-[0_20px_80px_rgba(0,255,255,0.3)]"
+      className="relative w-[340px] sm:w-[300px] md:w-[340px] backdrop-blur-2xl p-6 rounded-3xl overflow-hidden transition-all duration-700 hover:scale-[1.06] hover:shadow-[0_20px_80px_rgba(0,255,255,0.3)]"
       style={{
         transform: `rotate(${rotation}deg) translate(${translateX}px, ${translateY}px) scale(${scale})`,
         zIndex: 20 - (index % 10),
@@ -52,8 +52,8 @@ export default function ProjectCard({ project, index }: Props) {
       {/* 💧 Hover Ripple Animation */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-400/10 via-blue-400/5 to-indigo-500/10 transition-all duration-700 group-hover:blur-md group-hover:scale-105" />
 
-      {/* Media (video or image swiper) */}
-      <div className="relative z-10 aspect-video w-full mb-4 overflow-hidden rounded-xl border border-white/10 shadow-inner">
+      {/* Media Section */}
+      <div className="relative z-10 aspect-[16/9] w-full mb-5 overflow-hidden rounded-xl border border-white/10 shadow-inner">
         {showVideo ? (
           <Suspense fallback={<div className="text-center text-xs">Loading video...</div>}>
             <ReactPlayer width="100%" height="100%" controls />
@@ -76,19 +76,19 @@ export default function ProjectCard({ project, index }: Props) {
       </div>
 
       {/* Title */}
-      <h2 className="text-lg font-extrabold tracking-wider bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500 bg-clip-text text-transparent mb-2">
+      <h2 className="text-xl font-extrabold tracking-wide bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500 bg-clip-text text-transparent mb-3">
         {title}
       </h2>
 
       {/* Description */}
-      <p className="text-sm text-white/70 mb-3">{shortDescription}</p>
+      <p className="text-sm text-white/80 mb-4">{shortDescription}</p>
 
       {/* Tags */}
-      <div className="flex flex-wrap gap-2 mb-2">
+      <div className="flex flex-wrap gap-2 mb-3">
         {type.map((t, i) => (
           <span
             key={i}
-            className="bg-gradient-to-r from-purple-600/20 to-indigo-600/20 text-purple-200 text-[11px] px-3 py-1 rounded-full border border-purple-500/30"
+            className="bg-gradient-to-r from-purple-600/20 to-indigo-600/20 text-purple-200 text-xs px-3 py-1 rounded-full border border-purple-500/30"
           >
             {t}
           </span>
@@ -100,7 +100,7 @@ export default function ProjectCard({ project, index }: Props) {
         {techStack.map((tech, i) => (
           <span
             key={i}
-            className="bg-blue-600/10 text-blue-300 text-[11px] px-3 py-1 rounded-full border border-blue-500/20"
+            className="bg-blue-600/10 text-blue-300 text-xs px-3 py-1 rounded-full border border-blue-500/20"
           >
             {tech}
           </span>
@@ -110,5 +110,6 @@ export default function ProjectCard({ project, index }: Props) {
       {/* Glow Edge */}
       <div className="absolute inset-0 rounded-3xl pointer-events-none border border-white/10 shadow-[inset_0_0_30px_rgba(255,255,255,0.04)]" />
     </motion.div>
+
   );
 }
