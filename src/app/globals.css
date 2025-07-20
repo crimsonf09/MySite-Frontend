@@ -1,5 +1,4 @@
 @import "tailwindcss";
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -25,6 +24,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Tailwind component styles */
 @layer components {
   .footer-section {
     @apply w-full md:w-[250px] flex flex-col gap-6;
@@ -49,14 +49,17 @@ body {
   .footer-link {
     @apply text-sm text-gray-400 hover:text-white transition duration-200;
   }
+
   /* .input-base {
     @apply peer w-full h-full px-4 pt-5 pb-2 text-sm text-white border-2 rounded-lg outline-none transition duration-300 bg-[#0a0a0a];
   } */
 }
+
+/* Tailwind utility styles */
 @layer utilities {
   @keyframes underline-glow {
     0% {
-      box-shadow: 0 0 0px rgba(59, 130, 246, 0.2); /* tailwind blue-500 */
+      box-shadow: 0 0 0px rgba(59, 130, 246, 0.2); /* blue-500 */
     }
     50% {
       box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
@@ -66,7 +69,73 @@ body {
     }
   }
 
+  @keyframes rippleWave {
+    0% {
+      transform: scale(1) translateY(0);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scale(1.05) translateY(-4px);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1) translateY(0);
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes gradient-x {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .animate-gradient-x {
+    background-size: 200% auto;
+    animation: gradient-x 4s linear infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .touch-float {
+    animation: float 3.5s ease-in-out infinite;
+  }
+
   .animate-underline-glow {
     animation: underline-glow 2s ease-in-out infinite;
+  }
+
+  /* Your added animation and class below */
+  @keyframes touchPulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.5);
+    }
+    70% {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px 10px rgba(0, 255, 255, 0);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+    }
+  }
+
+  .touch-animate {
+    @apply transition duration-500 ease-in-out;
+    animation: touchPulse 2s infinite;
   }
 }
