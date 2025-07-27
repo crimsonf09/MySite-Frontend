@@ -4,6 +4,7 @@ import SearchBar from "@/components/SearchBar";
 import { useState, useEffect, useRef } from "react";
 import { getAllProjects } from "../services/projectService";
 import ProjectCard from "./components/projectCard";
+import NightSkyBackground from "../background/NightSkyBackground";
 
 export interface projectStructure {
     id: string;
@@ -34,26 +35,8 @@ export default function Project() {
 
     return (
         <main className="relative min-h-screen bg-[#020617] text-white overflow-x-hidden">
-            {/* 🎨 Background Effects */}
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-[-20%] left-[-20%] w-[600px] h-[600px] bg-cyan-500/20 blur-[180px] rounded-full animate-pulse-slow" />
-                <div className="absolute bottom-[-15%] right-[-10%] w-[500px] h-[500px] bg-indigo-400/20 blur-[160px] rounded-full animate-blob" />
-                <div className="absolute top-[50%] left-[40%] w-[300px] h-[300px] bg-blue-300/10 blur-[120px] rounded-full animate-pulse-slower" />
-
-                {/* 🌟 Floating shimmer particles */}
-                {[...Array(40)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="absolute w-1 h-1 bg-white/20 rounded-full animate-float"
-                        style={{
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 90}%`, // clamp to 90% max to avoid overflow
-                            animationDuration: `${2 + Math.random() * 4}s`,
-                            animationDelay: `${Math.random() * 5}s`,
-                        }}
-                    />
-                ))}
-            </div>
+            <NightSkyBackground />
+            
 
             {/* 👋 Hero Section */}
             <section className="relative z-10 h-screen flex flex-col justify-center items-center text-center px-4">
