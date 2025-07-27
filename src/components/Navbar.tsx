@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-
+import "../app/globals.css"
 export default function Navbar() {
   const navItems = [
     { label: "Home", href: "/" },
@@ -71,8 +71,8 @@ export default function Navbar() {
                   navRefs.current[label] = el;
                 }}
                 className={`relative z-10 px-6 py-3 rounded-md text-sm font-semibold uppercase tracking-wide flex justify-center items-center transition duration-300 ${isActive
-                    ? "text-white"
-                    : "text-gray-400 hover:text-white hover:scale-105"
+                  ? "text-white"
+                  : "text-gray-400 hover:text-white hover:scale-105"
                   }`}
               >
                 {label}
@@ -93,20 +93,21 @@ export default function Navbar() {
       </div>
 
       {/* Gradient animation for the logo */}
-      <style jsx>{`
-        @keyframes gradient-x {
-          0% {
-            background-position: 0% center;
-          }
-          100% {
-            background-position: 200% center;
-          }
-        }
-        .animate-gradient-x {
-          background-size: 200% auto;
-          animation: gradient-x 4s linear infinite;
-        }
-      `}</style>
+      <style jsx global>{`
+  @keyframes gradient-x {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+  .animate-gradient-x {
+    background-size: 200% auto;
+    animation: gradient-x 4s linear infinite;
+  }
+`}</style>
+
     </div>
   );
 }
