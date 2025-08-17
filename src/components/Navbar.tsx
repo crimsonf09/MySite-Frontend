@@ -7,6 +7,7 @@ import "../app/globals.css"
 export default function Navbar() {
   const navItems = [
     { label: "Home", href: "/" },
+    { label: "Chat", href: "/chat" },
     { label: "About Me", href: "/aboutme" },
     { label: "Project", href: "/project" },
     { label: "Contact", href: "/contact" },
