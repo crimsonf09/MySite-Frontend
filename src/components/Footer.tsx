@@ -4,7 +4,7 @@ import { FaMapMarkerAlt, FaGithub, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#0a0a0a] text-white px-16 py-12 flex flex-col md:flex-row gap-12 md:gap-6 justify-between ">
+    <footer className="w-full bg-[#0a0a0a] text-white px-24 py-12 flex flex-col md:flex-row gap-12 md:gap-6 justify-between ">
       {/* Brand Section */}
       <div className="footer-section">
         <div className="footer-header">TouchWebsite</div>
@@ -39,7 +39,9 @@ export default function Footer() {
       <div className="footer-section">
         <div className="footer-header">Quick Links</div>
         <ul className="flex flex-col gap-3">
-          {["Home", "About", "Services", "Projects", "Contact"].map((link) => (
+          {/* {["Home", "About", "Services", "Projects", "Contact"].map((link) => ( */}
+          {["Home", "Projects", "Contact"].map((link) => (
+
             <li key={link} className="footer-link">
               <a href={`#${link.toLowerCase()}`}>{link}</a>
             </li>
@@ -48,7 +50,7 @@ export default function Footer() {
       </div>
 
       {/* Subscribe */}
-      <div className="footer-section">
+      {/* <div className="footer-section">
         <div className="footer-header">Subscribe</div>
         <p className="footer-text mb-2">
           Stay up to date with our latest news and projects.
@@ -69,7 +71,7 @@ export default function Footer() {
             Subscribe
           </button>
         </form>
-      </div>
+      </div> */}
     </footer>
   );
 }
