@@ -1,8 +1,9 @@
-// socket.ts
+import { ChatMessage } from "./chatHistory";
+
 let socket: WebSocket | null = null;
 
-export function initSocket(onMessage: (data: any) => void) {
-  socket = new WebSocket("ws://localhost:8080/ws"); // adjust port if needed
+export function initSocket(onMessage: (data: ChatMessage) => void) {
+  socket = new WebSocket(`${process.env.NEXT_PUBLIC_SOCKET_URL}`); // adjust port if needed
 
   socket.onopen = () => {
     console.log("✅ WebSocket connected");

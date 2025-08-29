@@ -5,10 +5,10 @@ import InputBox from "@/components/TextBox";
 import { motion, AnimatePresence } from "framer-motion";
 import { initSocket, sendMessage } from "./components/socket";
 
-interface ChatMessage {
+export interface ChatMessage {
     sender: string;
     message: string;
-    timestamp: string;
+    timestamp: string | null;
 }
 
 export default function Chat() {
