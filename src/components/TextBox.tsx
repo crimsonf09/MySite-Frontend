@@ -34,7 +34,7 @@ export default function InputBox({
     if (value === "") setState("neutral");
     else setState(result ? "correct" : "incorrect");
   }, [value]);
-
+  console.log(status);
   const ringClass =
     state === "correct"
       ? "focus:ring-blue-400"

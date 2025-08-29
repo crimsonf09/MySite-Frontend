@@ -23,7 +23,7 @@ export default function Home() {
               Data Scientist & Developer
             </motion.h2>
             <motion.h1 className="text-4xl md:text-5xl font-extrabold leading-tight" {...fadeUp(0.1)}>
-              Hey, I'm <span className="text-cyan-400">Touch</span>,<br />
+              Hey, I&apos;m <span className="text-cyan-400">Touch</span>,<br />
               Data Scientist & <br className="md:hidden" />
               Full Stack Developer
             </motion.h1>
@@ -36,7 +36,7 @@ export default function Home() {
               className="inline-block mt-8 text-cyan-400 hover:underline text-lg font-semibold"
               {...fadeUp(0.3)}
             >
-              Let’s chat →
+              Let&apos;s chat →
             </motion.a>
           </div>
         </div>
@@ -62,11 +62,12 @@ export default function Home() {
           {/* About Text */}
           <div className="w-5/8 md:w-2/3 text-center md:text-left">
             <motion.h3 className="text-3xl font-bold text-white mb-4" {...fadeUp(0.1)}>
-              Hey, I'm Touch
+              Hey, I&apos;m Touch
             </motion.h3>
             <div className="text-gray-400 text-lg flex flex-col gap-5 mb-10 leading-relaxed">
               <motion.p {...fadeUp(0.2)}>
-                I'm a <span className="text-cyan-400">Data Scientist</span> and <span className="text-cyan-400">Full-stack Developer</span> based in Bangkok.
+                I&apos;m a <span className="text-cyan-400">Data Scientist</span> and{" "}
+                <span className="text-cyan-400">Full-stack Developer</span> based in Bangkok.
                 I enjoy making sense of complex data and turning it into things people can actually use.
               </motion.p>
               <motion.p {...fadeUp(0.3)}>
@@ -74,7 +75,7 @@ export default function Home() {
                 focusing on data, web tech, and anything that keeps me curious.
               </motion.p>
               <motion.p {...fadeUp(0.4)}>
-                Whether it’s building a clean UI or digging into a messy dataset — if it’s challenging and hands-on, I’m all in.
+                Whether it&apos;s building a clean UI or digging into a messy dataset — if it&apos;s challenging and hands-on, I&apos;m all in.
               </motion.p>
             </div>
 
